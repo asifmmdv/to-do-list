@@ -13,8 +13,7 @@
         justify-content: center;
     }
     section {
-        position: absolute;
-        top :20%;
+        margin: 120px;
         width: 360px;
     }
     .head{
@@ -39,7 +38,7 @@
         display: flex; 
         justify-content: space-between;
         align-items: center;
-        padding-left: 15px;
+        padding-left: 14px;
         font-size: 24px;
         font-weight: bold;
         color: rgb(255, 9, 9);
@@ -68,7 +67,8 @@
         border: 1px solid rgb(130, 238, 130);
         color:rgb(231, 250, 112);
         border-radius: 12px;
-        padding-left: 15px;
+        padding-left: 14px;
+        font-weight: bold;
         font-size: 24px;    
         &:hover{
             background-color: rgba(0, 255, 255, 0.576);
@@ -128,3 +128,4 @@
         }
        
     }
+    
