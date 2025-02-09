@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>to do list</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.cdnfonts.com/css/japanese-style" rel="stylesheet">
+    </head>
+    <body>
+        <section>
+            <div class="head">
+        <input type="text" id="inp">
+        <button id="addbtn" onclick="add()">ADD</button>
+        <button id="delbtn" onclick="deleteAll()">Delete All</button>
+            </div>
+        <table id="tbl"></table>
+        </section>
+        <script>
+            const inp = document.getElementById('inp');
+            const tbl = document.getElementById('tbl');
+            let rowId = 0;
+
+            function add() {
+                let text = inp.value;
+                if (text.trim() !== '') {
+                    rowId++; 
+                    let rowHTML = `<tr id="row${rowId}"><td>${text} <button class="remove-btn" onclick="removeRow('row${rowId}')">Remove</button></td></tr>`;
+                    tbl.innerHTML = rowHTML + tbl.innerHTML;
+                    inp.value = '';
+                }
+            }
+
+            function removeRow(id) {
+                document.getElementById(id).style.display = "none";
+            }
+
+            function deleteAll() {
+                tbl.innerHTML = ''; 
+            }
+        </script>
+    </body>
+</html>
