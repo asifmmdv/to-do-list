@@ -1,43 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>to do list</title>
-        <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.cdnfonts.com/css/japanese-style" rel="stylesheet">
-    </head>
-    <body>
-        <section>
-            <div class="head">
-        <input type="text" id="inp">
-        <div class="btns">
-        <button id="addbtn" onclick="add()">ADD</button>
-        <button id="delbtn" onclick="deleteAll()">Delete All</button></div>
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/japanese-style" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div class="head">
+            <input type="text" id="inp">
+            <div class="btns">
+                <button id="addbtn" onclick="add()">ADD</button>
+                <button id="delbtn" onclick="deleteAll()">Delete All</button>
             </div>
-        <table id="tbl"></table>
-        </section>
-        <script>
-            const inp = document.getElementById('inp');
-            const tbl = document.getElementById('tbl');
-            let rowId = 0;
+            <button id="shwdel" onclick="showDeleted()">Show Deleted</button>
+        </div>
+        <table class="tbls" id="tbl"></table>
+        <table class="tbls" id="tbl2"></table>
+    </section>
 
-            function add() {
-                let text = inp.value;
-                if (text.trim() !== '') {
-                    rowId++; 
-                    let rowHTML = `<tr id="row${rowId}"><td>${text} <button class="remove-btn" onclick="removeRow('row${rowId}')">Remove</button></td></tr>`;
-                    tbl.innerHTML = rowHTML + tbl.innerHTML;
-                    inp.value = '';
-                }
-            }
+    <script>
+        const inp = document.getElementById('inp');
+        const tbl = document.getElementById('tbl');
+        const tbl2 = document.getElementById('tbl2');
 
-            function removeRow(id) {
-                document.getElementById(id).style.display = "none";
-            }
+        let arr = [];
+        let delArr = [];
 
-            function deleteAll() {
-                tbl.innerHTML = ''; 
+        function add() {
+            if (inp.value.trim() !== "" && !arr.includes(inp.value.trim())) {
+                arr.push(inp.value.trim());
+                inp.value = ""; 
+                updateMainList();
             }
-        </script>
-    </body>
+        }
+
+        function remove(index) {
+            delArr.push(arr[index]); 
+            arr.splice(index, 1);
+            updateMainList();
+        }
+
+        function deleteAll() {
+            delArr.push(...arr); 
+            arr.length = 0;
+            updateMainList();
+        }
+
+        function deleteForever(index) {
+            delArr.splice(index, 1);
+            showDeleted();
+        }
+
+        function showDeleted() {
+            tbl2.innerHTML = '';
+            for (let i = 0; i < delArr.length; i++) {
+                tbl2.innerHTML += `<tr>
+                    <td>${delArr[i]} 
+                    <button class="remove-btn" onclick="deleteForever(${i})">Delete Forever</button>
+                    </td>
+                </tr>`;
+            }
+        }
+
+        function updateMainList() {
+            tbl.innerHTML = '';
+            for (let i = 0; i < arr.length; i++) {
+                tbl.innerHTML += `<tr>
+                    <td>${arr[i]} 
+                    <button class="remove-btn" onclick="remove(${i})">Delete</button>
+                    </td>
+                </tr>`;
+            }
+        }
+    </script>
+</body>
 </html>

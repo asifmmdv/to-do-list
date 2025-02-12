@@ -8,10 +8,9 @@
 }
     body {
         display: flex;
-        background: url(/cyberpunk-city-buildings-art.jpg) center/cover no-repeat;
+        background: url(/cyberpunk-city-buildings-art.jpg) center/cover no-repeat ;
         min-height: 100vh;
-        justify-content: center;
-
+        justify-content: center;    
     }
     section {
         margin-top: 120px;
@@ -27,10 +26,10 @@
         border-radius: 16px;
         background-color: rgba(254, 68, 31, 0.391);
     }
-    #tbl {
+    .tbls {
         border-collapse: collapse;
         margin: 10px 0; 
-        width: 100%;
+        width: 100%
         }
     td { 
         height: 100px;
@@ -134,4 +133,81 @@
     .btns{
         display: flex;
         margin-left: auto;
+    }
+@keyframes moveEffect {
+    0% {
+        transform: translateX(0);
+        box-shadow: 0 0 10px rgb(255, 0, 0);
+    }
+    25% {
+        transform: translateX(10px);
+        box-shadow: 0 0 20px rgb(255, 0, 0);
+    }
+    50% {
+        transform: translateX(-10px);
+        box-shadow: 0 0 20px rgb(255, 0, 0);
+    }
+    100% {
+        transform: translateX(0);
+        box-shadow: 0 0 10px rgb(255, 0, 0);
+    }
+}
+@keyframes moveEffect2 {
+    0% {
+        transform: translateX(0);
+        box-shadow: 0 0 10px rgb(0, 60, 255);
+    }
+    25% {
+        transform: translateX(10px);
+        box-shadow: 0 0 20px rgb(0, 60, 255);
+    }
+    50% {
+        transform: translateX(-10px);
+        box-shadow: 0 0 20px rgb(0, 60, 255);
+    }
+    100% {
+        transform: translateX(0);
+        box-shadow: 0 0 10px rgb(0, 60, 255);
+    }
+}
+
+.head:hover {
+    animation: moveEffect 1.2s infinite alternate ease-in-out;
+}
+td:hover {
+    animation: moveEffect2 1.2s infinite alternate ease-in-out;
+}
+
+#shwdel{
+    justify-self: flex-end;
+    width: 140px;
+    height: 80px;
+    border-radius: 12px;
+    border: 1px solid rgb(196, 106, 106);
+    background-color: rgb(45, 202, 119);
+    font-weight: bold;
+    font-size: 32px;
+    color: rgb(232, 9, 161);
+    &:hover{
+        background-color: rgb(232, 9, 161) ;
+        color:  rgb(45, 202, 119);
+    }
+    &:active{
+        scale:1.05
+    }  
+}
+    #tbl2 td{
+        height: 100px;
+        margin-top: 5px;
+        text-align: center;
+        border: 1px solid rgb(141, 205, 187); 
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 14px;
+        font-size: 48px;
+        font-weight: bold;
+        color: rgb(13, 247, 208);
+        background-color: rgb(242, 255, 0);
+        border-radius: 12px;
     }
