@@ -14,19 +14,21 @@
                 <button id="addbtn" onclick="add()">ADD</button>
                 <button id="delbtn" onclick="deleteAll()">Delete All</button>
             </div>
-            <button id="shwdel" onclick="showDeleted()">Show Deleted</button>
+            <button id="shwdel" onclick="toggleShowDeleted()">Show Deleted</button>
         </div>
         <table class="tbls" id="tbl"></table>
-        <table class="tbls" id="tbl2"></table>
+        <table class="tbls" id="tbl2" style="display: none;"></table>
     </section>
 
     <script>
         const inp = document.getElementById('inp');
         const tbl = document.getElementById('tbl');
         const tbl2 = document.getElementById('tbl2');
+        const shwdelBtn = document.getElementById('shwdel');
 
         let arr = [];
         let delArr = [];
+        let showDeletedActive = false; 
 
         function add() {
             if (inp.value.trim() !== "" && !arr.includes(inp.value.trim())) {
@@ -40,17 +42,27 @@
             delArr.push(arr[index]); 
             arr.splice(index, 1);
             updateMainList();
+            if (showDeletedActive) showDeleted(); 
         }
 
         function deleteAll() {
             delArr.push(...arr); 
             arr.length = 0;
             updateMainList();
+            if (showDeletedActive) showDeleted(); 
         }
 
         function deleteForever(index) {
             delArr.splice(index, 1);
             showDeleted();
+        }
+
+        function toggleShowDeleted() {
+            showDeletedActive = !showDeletedActive; 
+            tbl2.style.display = showDeletedActive ? "table" : "none";
+            shwdelBtn.innerHTML = showDeletedActive ? "&#128526;" : "Show Deleted"; 
+            shwdelBtn.style.fontSize = showDeletedActive ? '50px' : ''; 
+            if (showDeletedActive) showDeleted();
         }
 
         function showDeleted() {
@@ -62,11 +74,6 @@
                     </td>
                 </tr>`;
             }
-            let shwdelBtn = document.getElementById('shwdel');
-            if (shwdelBtn.innerHTML !== '&#x1F60E;') {
-                shwdelBtn.innerHTML = '&#x1F60E;';
-                shwdelBtn.style.fontSize = '50px';
-    }
         }
 
         function updateMainList() {
